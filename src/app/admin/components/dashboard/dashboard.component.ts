@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
     this.alertify.message("E-Ticaret admin", {
       messageType : MessageType.Success,
       position : Position.BottomLeft,
-      dissmissOther:true,
+      dissmissOther:false,
       delay:5   
     });
   }

@@ -8,7 +8,7 @@ export class AlertifyService {
   constructor() { }
 
   // message(message: string, messageType: MessageType, position: Position, delay: number=3, dismissOther: boolean =false ) {
-    message(message: string, options: Partial<AlertifyOptions>){
+  message(message: string, options: Partial<AlertifyOptions>){
     alertify.set('notifier', 'delay', options.delay);
     alertify.set('notifier','position', options.position);
     const msg = alertify[options.messageType as string](message);
