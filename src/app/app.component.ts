@@ -15,10 +15,7 @@ export class AppComponent {
    *
    */
   constructor(private toastrService: CustomToastrService) {
-    toastrService.message("World peace", "Ana de armas", {
-      position : ToastrPosition.TopCenter,
-      toastrMessageType: ToastrMessageType.Info
-    });
+
   }
 }
 
