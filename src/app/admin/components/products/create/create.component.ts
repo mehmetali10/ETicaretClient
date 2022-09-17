@@ -20,20 +20,55 @@ export class CreateComponent extends BaseComponent implements OnInit {
   }
 
   create(name: HTMLInputElement, stock: HTMLInputElement, price: HTMLInputElement) {
-    this.spinner.show(SpinnerType.lineSpinClockwiseFadeRotating);
-    const create_product : Create_Product = new Create_Product();
+    this.showSpinner(SpinnerType.lineSpinClockwiseFadeRotating);
+    const create_product: Create_Product = new Create_Product();
     create_product.name = name.value;
     create_product.stock = parseInt(stock.value);
     create_product.price = parseFloat(price.value);
 
-    this.productService.create(create_product, () => {
-       this.hideSpinner(SpinnerType.lineSpinClockwiseFadeRotating);
-       this.alertify.message("Product saved successfuly", {
-        position: Position.TopLeft,
-        messageType: MessageType.Success,
-        dissmissOther: true
-       })
+    if (!name.value) {
+      this.alertify.message("Please enter product name!", {
+        dissmissOther: true,
+        messageType: MessageType.Error,
+        position: Position.TopRight
       });
-  }
+      return;
+    }
 
+    if (parseInt(stock.value) < 0) {
+      this.alertify.message("stock quantity cannot be a negative number!", {
+        dissmissOther: true,
+        messageType: MessageType.Error,
+        position: Position.TopRight
+      });
+      return;
+    }
+
+    if (parseInt(price.value) < 0) {
+      this.alertify.message("price information has to be a positive number!", {
+        dissmissOther: true,
+        messageType: MessageType.Error,
+        position: Position.TopRight
+      });
+      return;
+    }
+
+
+
+    this.productService.create(create_product, () => {
+      this.hideSpinner(SpinnerType.lineSpinClockwiseFadeRotating);
+      this.alertify.message("Ürün başarıyla eklenmiştir.", {
+        dissmissOther: true,
+        messageType: MessageType.Success,
+        position: Position.TopRight
+      });
+    }, errorMessage => {
+      this.alertify.message(errorMessage,
+        {
+          dissmissOther: true,
+          messageType: MessageType.Error,
+          position: Position.TopRight
+        });
+    });
+  }
 }

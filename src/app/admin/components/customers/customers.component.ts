@@ -15,7 +15,7 @@ export class CustomersComponent extends BaseComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.showSpinner(SpinnerType.squareJellyBox);   
+    this.showSpinner(SpinnerType.lineSpinClockwiseFadeRotating);   
   }
 
 }
